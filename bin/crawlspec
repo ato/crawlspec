@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DIR="$(dirname "$(dirname "$(readlink -f "$0")")")"
+
+if [ "$DIR/pom.xml" -nt "$DIR/target/classpath" ]; then
+    (cd $DIR && mvn dependency:build-classpath -q -Dmdep.outputFile=target/classpath)
+fi
+
+if [ ! -e "$DIR/target/classes" ]; then
+    (cd $DIR && mvn compile)
+fi
+
+java -cp "$DIR/resources:$DIR/target/classes:$(cat "$DIR"/target/classpath)" org.netpreserve.crawlspec.Main "$@"

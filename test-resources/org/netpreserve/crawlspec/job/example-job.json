@@ -1,0 +1,17 @@
+{
+  "id": "example-job",
+  "userAgent": "crawlspec_bot/2.0",
+  "timeLimit": 3600,
+  "sizeLimit": 100000000,
+  "robotsPolicy": "obey",
+  "seeds": [
+    {
+      "url": "https://example.org/",
+      "scope": "domain"
+    },
+    {
+      "url": "https://www.example.com/foo/bar.html",
+      "scope": "page"
+    }
+  ]
+}
