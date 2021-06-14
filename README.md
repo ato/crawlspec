@@ -9,8 +9,9 @@ documentation once things are more fleshed out.
 At the moment the schema is defined by [Job.java](src/org/netpreserve/crawlspec/job/Job.java).
 
 Crawlers currently supported by the reference implementation: Browsertrix, Heritrix, HTTrack, Wget.
+Each crawler only supports a subset of the defined options. See the `@SupportedBy` annotations for details.
 
-Example:
+Example job config:
 
 ```json
 {
@@ -36,4 +37,15 @@ Example:
 }
 ```
 
-Each crawler only supports a subset of the defined options. See the `@SupportedBy` annotations for details.
+Expected usage: (not functional yet)
+
+```shell
+# Build a Heritrix job (crawler-beans.cxml, seeds.txt etc) 
+crawlspec build myjob.json --crawler heritrix --output /heritrix/jobs/myjob/
+
+# Immediately run a crawl job
+crawlspec run --crawler wget myjob.json
+
+# Check job config is valid and options are supported by the given crawler
+crawlspec validate --crawler wget myjob.json
+```
