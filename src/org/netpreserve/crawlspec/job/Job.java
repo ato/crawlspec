@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.netpreserve.crawlspec.CrawlerId.*;
-import static org.netpreserve.crawlspec.CrawlerId.HTTRACK;
 
 public class Job {
     private List<Seed> seeds = new ArrayList<>();
@@ -44,6 +43,12 @@ public class Job {
      */
     @SupportedBy({HTTRACK, HERITRIX, WGET})
     private RobotsPolicy robotsPolicy;
+
+    /**
+     * A list of cookies to pre-populate the crawler's cookie jar with (e.g. for authentication).
+     */
+    @SupportedBy({})
+    private List<Cookie> cookies;
 
     public String getUserAgent() {
         return userAgent;
@@ -99,5 +104,13 @@ public class Job {
 
     public void setRobotsPolicy(RobotsPolicy robotsPolicy) {
         this.robotsPolicy = robotsPolicy;
+    }
+
+    public List<Cookie> getCookies() {
+        return cookies;
+    }
+
+    public void setCookies(List<Cookie> cookies) {
+        this.cookies = cookies;
     }
 }

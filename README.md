@@ -34,6 +34,17 @@ Example job config:
       "url": "https://department.example/publications/annual-report-2020",
       "scope": "page"
     }
+  ],
+  "cookies": [
+    {
+      "domain": "example.org",
+      "path": "/",
+      "name": "sessionid",
+      "value": "9945453f7ca22",
+      "secure": true,
+      "httpOnly": false,
+      "expirationDate": 1623766184
+    }
   ]
 }
 ```

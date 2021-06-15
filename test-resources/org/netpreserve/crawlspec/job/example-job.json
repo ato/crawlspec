@@ -13,5 +13,16 @@
       "url": "https://www.example.com/foo/bar.html",
       "scope": "page"
     }
+  ],
+  "cookies": [
+    {
+      "domain": "example.org",
+      "path": "/",
+      "name": "sessionid",
+      "value": "9945453f7ca22",
+      "secure": true,
+      "httpOnly": false,
+      "expirationDate": 1623766184
+    }
   ]
 }
