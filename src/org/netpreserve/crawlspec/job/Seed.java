@@ -1,6 +1,9 @@
 package org.netpreserve.crawlspec.job;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Seed {
+    @JsonProperty(required = true)
     private String url;
     private Scope scope;
 
