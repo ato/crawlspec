@@ -47,7 +47,7 @@ public class Job {
     /**
      * A list of cookies to pre-populate the crawler's cookie jar with (e.g. for authentication).
      */
-    @SupportedBy({})
+    @SupportedBy({HERITRIX, HTTRACK, WGET})
     private List<Cookie> cookies;
 
     public String getUserAgent() {
@@ -108,6 +108,10 @@ public class Job {
 
     public List<Cookie> getCookies() {
         return cookies;
+    }
+
+    public boolean hasCookies() {
+        return getCookies() != null && !getCookies().isEmpty();
     }
 
     public void setCookies(List<Cookie> cookies) {

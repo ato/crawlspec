@@ -2,6 +2,7 @@ package org.netpreserve.crawlspec.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.List;
 
 public class Command {
@@ -31,9 +32,35 @@ public class Command {
         }
     }
 
+    private static final BitSet shellEscapeChars = new BitSet();
+    static {
+        "|&;<>()$`\\\"' *?[#~%".chars().forEach(shellEscapeChars::set);
+    }
+
     @Override
     public String toString() {
-        return String.join(" ", list);
+        StringBuilder builder = new StringBuilder();
+        for (String word: list) {
+            if (builder.length() > 0) {
+                builder.append(' ');
+            }
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                if (c == '\r') {
+                    builder.append("$'\\r'");
+                } else if (c == '\n') {
+                    builder.append("$'\\n'");
+                } else if (c == '\t') {
+                    builder.append("$'\\t'");
+                } else {
+                    if (shellEscapeChars.get(c)) {
+                        builder.append('\\');
+                    }
+                    builder.append(c);
+                }
+            }
+        }
+        return builder.toString();
     }
 
     public List<String> list() {

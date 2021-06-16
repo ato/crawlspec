@@ -46,14 +46,14 @@ public class Cookie {
     public String toTxt() {
         StringBuilder builder = new StringBuilder();
         try {
-            toTxt(builder);
+            writeTo(builder);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
         return builder.toString();
     }
 
-    public void toTxt(Appendable writer) throws IOException {
+    public void writeTo(Appendable writer) throws IOException {
         boolean includeSubdomains = !isHostOnly();
         writer.append(getDomain());
         writer.append('\t');
