@@ -17,6 +17,7 @@ Example job config:
 ```json
 {
   "id": "example-job",
+  "schedule": "0 */2 * * 1-5",
   "userAgent": "crawlspec_bot",
   "timeLimit": 3600,
   "sizeLimit": 100000000,

@@ -50,6 +50,18 @@ public class Job {
     @SupportedBy({HERITRIX, HTTRACK, WGET})
     private List<Cookie> cookies;
 
+    /**
+     * An optional schedule for this crawl job as a five field cron expression.
+     * <p>
+     * Whitespace-separated fields: minute, hour, day of month, month of year, day of week (0=Sunday).<br>
+     * Operators: inclusive range (2-4), list (2,3,6-8), every (*), interval (*&#47;5).
+     * <p>
+     * Examples:<br>
+     * <code>0 *&#47;2 * * *</code> &mdash; run every two hours<br>
+     * <code>0 9,18 * * 1-5</code> &mdash; run at 9 AM and 6 PM on weekdays
+     */
+    private String schedule;
+
     public String getUserAgent() {
         return userAgent;
     }
@@ -116,5 +128,13 @@ public class Job {
 
     public void setCookies(List<Cookie> cookies) {
         this.cookies = cookies;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 }
