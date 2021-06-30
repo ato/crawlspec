@@ -44,22 +44,32 @@ public class Command {
             if (builder.length() > 0) {
                 builder.append(' ');
             }
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                if (c == '\r') {
-                    builder.append("$'\\r'");
-                } else if (c == '\n') {
-                    builder.append("$'\\n'");
-                } else if (c == '\t') {
-                    builder.append("$'\\t'");
-                } else {
-                    if (shellEscapeChars.get(c)) {
-                        builder.append('\\');
-                    }
-                    builder.append(c);
+            shellEscape(word, builder);
+        }
+        return builder.toString();
+    }
+
+    private static void shellEscape(String string, StringBuilder builder) {
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (c == '\r') {
+                builder.append("$'\\r'");
+            } else if (c == '\n') {
+                builder.append("$'\\n'");
+            } else if (c == '\t') {
+                builder.append("$'\\t'");
+            } else {
+                if (shellEscapeChars.get(c)) {
+                    builder.append('\\');
                 }
+                builder.append(c);
             }
         }
+    }
+
+   public static String shellEscape(String string) {
+        StringBuilder builder = new StringBuilder();
+        shellEscape(string, builder);
         return builder.toString();
     }
 

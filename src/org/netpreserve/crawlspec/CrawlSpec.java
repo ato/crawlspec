@@ -12,7 +12,11 @@ public class CrawlSpec {
         if (!Files.exists(outputDirectory)) {
             Files.createDirectories(outputDirectory);
         }
-        crawler.writeConfig(job, new ConfigWriter(outputDirectory));
+        ConfigWriter configWriter = new ConfigWriter(outputDirectory);
+        crawler.writeConfig(job, configWriter);
+        if (job.getSchedule() != null) {
+            configWriter.writeCrontab(job.getSchedule());
+        }
     }
 
     public void run(Crawler crawler, Job job, Path outputDirectory) throws IOException, InterruptedException {
